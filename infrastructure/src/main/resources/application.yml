@@ -11,6 +11,17 @@ keycloak:
   admin-users-uri: /users
   subscribers-group-id: ae4561cf-938d-4640-89b0-0ac72e5d53db
 
+kafka:
+  auto-create-topics: false
+  pool-timeout: 1_000
+  consumers:
+    events:
+      auto-offset-reset: earliest
+      concurrency: 1
+      id: kafka-listener-events
+      topics: subscription.subscription.events
+      group-id: subscription-service
+
 server:
   port: 8080
   shutdown: graceful

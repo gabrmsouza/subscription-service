@@ -46,6 +46,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-oauth2-resource-server')
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.kafka:spring-kafka")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdoc") {
         exclude group: 'org.springdoc', module: 'springdoc-openapi-ui'
@@ -57,6 +58,7 @@ dependencies {
     testImplementation('org.springframework.security:spring-security-test')
     testImplementation("org.springframework.cloud:spring-cloud-contract-wiremock")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
 
     testImplementation("com.h2database:h2")
     testImplementation("org.flywaydb:flyway-core")
@@ -64,6 +66,7 @@ dependencies {
 
     testImplementation('org.testcontainers:testcontainers:1.19.8')
     testImplementation('org.testcontainers:junit-jupiter:1.19.8')
+    testImplementation("org.testcontainers:kafka:1.19.8")
 }
 
 dependencyManagement {

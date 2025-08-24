@@ -1,6 +1,10 @@
 package io.github.gabrmsouza.subscription.infrastructure.configuration;
 
+import io.github.gabrmsouza.subscription.domain.DomainEvent;
 import io.github.gabrmsouza.subscription.infrastructure.authentication.clientcredentials.RefreshClientCredentials;
+import io.github.gabrmsouza.subscription.infrastructure.observer.Publisher;
+import io.github.gabrmsouza.subscription.infrastructure.observer.domainevent.AddToGroupSubscriber;
+import io.github.gabrmsouza.subscription.infrastructure.observer.domainevent.RemoveFromGroupSubscriber;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,5 +34,16 @@ public class WebServerConfiguration {
     @Bean
     LocalValidatorFactoryBean localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();
+    }
+
+    @Bean
+    Publisher<DomainEvent> domainEventPublisher(
+            final AddToGroupSubscriber addToGroupSubscriber,
+            final RemoveFromGroupSubscriber removeFromGroupSubscriber
+    ) {
+        var publisher = new Publisher<DomainEvent>();
+        publisher.register(addToGroupSubscriber);
+        publisher.register(removeFromGroupSubscriber);
+        return publisher;
     }
 }
